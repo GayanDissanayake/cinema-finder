@@ -1,9 +1,9 @@
 import { List, Divider } from "@mui/material";
-import CinemaListItem from './CinemaListItem';
+import CinemaListItem from "./CinemaListItem";
 
 const CinemaListAside = ({ cinemas, Header = null }) => {
   return (
-    <List sx={{ maxHeight: 'calc(100vh - 112px)', overflowY: 'auto' }}>
+    <List sx={{ maxHeight: "calc(100vh - 112px)", overflowY: "auto", pt: 0 }}>
       <Header {...{ cinemas }} />
       {Header && <Divider />}
       {/* NOTE: potential future feature of adding frontend sorting */}
@@ -13,6 +13,6 @@ const CinemaListAside = ({ cinemas, Header = null }) => {
         <CinemaListItem {...cinema} key={idx} />
       ))}
     </List>
-  )
-}
+  );
+};
 export default CinemaListAside;
