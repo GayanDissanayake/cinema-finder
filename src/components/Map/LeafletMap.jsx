@@ -3,7 +3,7 @@ import {
   // Rectangle,
   TileLayer,
   Marker,
-  useMap
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
@@ -29,7 +29,7 @@ const MapSnappingEventListener = () => {
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Unexpected error while attempting map navigation", {
-        variant: "error"
+        variant: "error",
       });
     }
   });
@@ -40,7 +40,7 @@ const convertBounds = ([w, s, e, n]) => [
   // Leaflet expects boundings boxes to be an array consisting of the corners of the box.
   // These corners are [lat, lon] [LatLng docs](https://leafletjs.com/reference.html#latlng)
   [s, w],
-  [n, e]
+  [n, e],
 ];
 
 const LeafletMarker = ({ lat, lon }) => <Marker position={[lat, lon]} />;
@@ -56,13 +56,13 @@ const LeafletMap = ({ children }) => {
         zoomDelta={0.5}
       >
         <MapSnappingEventListener />
+        {/* https://leafletjs.com/reference.html#tilelayer */}
         <TileLayer
-          attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
-          subdomains="abcd"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          subdomains={["a", "b", "c"]}
           minZoom={0}
           maxZoom={18}
-          ext="png"
         />
         <MapContext.Provider value={{ Marker: LeafletMarker }}>
           {children}
